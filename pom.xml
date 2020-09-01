@@ -45,10 +45,25 @@
                     <configurationFile>
                         src/main/resources/mybatis-generator.xml
                     </configurationFile>
+
                 </configuration>
+
             </plugin>
         </plugins>
+        <resources>
+
+            <resource>
+                <directory>src/main/resources</directory>
+                <includes>
+                    <include>**/*.*</include>
+                </includes>
+                <filtering>true</filtering>
+            </resource>
+
+        </resources>
+
     </build>
+
     <parent>
         <artifactId>spring-boot-parent</artifactId>
         <groupId>org.springframework.boot</groupId>

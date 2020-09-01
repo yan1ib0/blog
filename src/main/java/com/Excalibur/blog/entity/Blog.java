@@ -1,5 +1,6 @@
 package com.Excalibur.blog.entity;
 
+import java.util.Arrays;
 import java.util.Date;
 
 public class Blog {
@@ -161,5 +162,27 @@ public class Blog {
 
     public void setContent(byte[] content) {
         this.content = content;
+    }
+
+    @Override
+    public String toString() {
+        return "Blog{" +
+                "id=" + id +
+                ", title='" + title + '\'' +
+                ", summary='" + summary + '\'' +
+                ", publishDate=" + publishDate +
+                ", columnId=" + columnId +
+                ", views=" + views +
+                ", tags='" + tags + '\'' +
+                ", comments='" + comments + '\'' +
+                ", blogImgs='" + blogImgs + '\'' +
+                ", blogState=" + blogState +
+                ", admireState=" + admireState +
+                ", commentsState=" + commentsState +
+                ", recommendState=" + recommendState +
+                ", reprintState=" + reprintState +
+                ", createTime=" + createTime +
+                ", content=" + Arrays.toString(content) +
+                '}';
     }
 }

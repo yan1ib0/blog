@@ -102,4 +102,20 @@ public class Comment {
     public void setCreateTime(String createTime) {
         this.createTime = createTime == null ? null : createTime.trim();
     }
+
+    @Override
+    public String toString() {
+        return "Comment{" +
+                "id=" + id +
+                ", replyName='" + replyName + '\'' +
+                ", replyEmail='" + replyEmail + '\'' +
+                ", blogId=" + blogId +
+                ", publishDate=" + publishDate +
+                ", authorState=" + authorState +
+                ", replyState=" + replyState +
+                ", replyContent='" + replyContent + '\'' +
+                ", parentId=" + parentId +
+                ", createTime='" + createTime + '\'' +
+                '}';
+    }
 }

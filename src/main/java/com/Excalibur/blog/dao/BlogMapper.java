@@ -1,17 +1,24 @@
 package com.Excalibur.blog.dao;
 
 import com.Excalibur.blog.entity.Blog;
+import com.Excalibur.blog.entity.BlogExample;
+import java.util.List;
 import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.InsertProvider;
+import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Result;
 import org.apache.ibatis.annotations.Results;
 import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.SelectProvider;
 import org.apache.ibatis.annotations.Update;
 import org.apache.ibatis.annotations.UpdateProvider;
 import org.apache.ibatis.type.JdbcType;
 
 public interface BlogMapper {
+    @SelectProvider(type=BlogSqlProvider.class, method="countByExample")
+    long countByExample(BlogExample example);
+
     @Delete({
         "delete from blog_content",
         "where id = #{id,jdbcType=INTEGER}"
@@ -41,6 +48,47 @@ public interface BlogMapper {
     @InsertProvider(type=BlogSqlProvider.class, method="insertSelective")
     int insertSelective(Blog record);
 
+    @SelectProvider(type=BlogSqlProvider.class, method="selectByExampleWithBLOBs")
+    @Results({
+        @Result(column="id", property="id", jdbcType=JdbcType.INTEGER, id=true),
+        @Result(column="title", property="title", jdbcType=JdbcType.VARCHAR),
+        @Result(column="summary", property="summary", jdbcType=JdbcType.VARCHAR),
+        @Result(column="publish_date", property="publishDate", jdbcType=JdbcType.TIMESTAMP),
+        @Result(column="column_id", property="columnId", jdbcType=JdbcType.INTEGER),
+        @Result(column="views", property="views", jdbcType=JdbcType.INTEGER),
+        @Result(column="tags", property="tags", jdbcType=JdbcType.VARCHAR),
+        @Result(column="comments", property="comments", jdbcType=JdbcType.VARCHAR),
+        @Result(column="blog_imgs", property="blogImgs", jdbcType=JdbcType.VARCHAR),
+        @Result(column="blog_state", property="blogState", jdbcType=JdbcType.TINYINT),
+        @Result(column="admire_state", property="admireState", jdbcType=JdbcType.TINYINT),
+        @Result(column="comments_state", property="commentsState", jdbcType=JdbcType.TINYINT),
+        @Result(column="recommend_state", property="recommendState", jdbcType=JdbcType.TINYINT),
+        @Result(column="reprint_state", property="reprintState", jdbcType=JdbcType.TINYINT),
+        @Result(column="create_time", property="createTime", jdbcType=JdbcType.TIMESTAMP),
+        @Result(column="content", property="content", jdbcType=JdbcType.LONGVARBINARY)
+    })
+    List<Blog> selectByExampleWithBLOBs(BlogExample example);
+
+    @SelectProvider(type=BlogSqlProvider.class, method="selectByExample")
+    @Results({
+        @Result(column="id", property="id", jdbcType=JdbcType.INTEGER, id=true),
+        @Result(column="title", property="title", jdbcType=JdbcType.VARCHAR),
+        @Result(column="summary", property="summary", jdbcType=JdbcType.VARCHAR),
+        @Result(column="publish_date", property="publishDate", jdbcType=JdbcType.TIMESTAMP),
+        @Result(column="column_id", property="columnId", jdbcType=JdbcType.INTEGER),
+        @Result(column="views", property="views", jdbcType=JdbcType.INTEGER),
+        @Result(column="tags", property="tags", jdbcType=JdbcType.VARCHAR),
+        @Result(column="comments", property="comments", jdbcType=JdbcType.VARCHAR),
+        @Result(column="blog_imgs", property="blogImgs", jdbcType=JdbcType.VARCHAR),
+        @Result(column="blog_state", property="blogState", jdbcType=JdbcType.TINYINT),
+        @Result(column="admire_state", property="admireState", jdbcType=JdbcType.TINYINT),
+        @Result(column="comments_state", property="commentsState", jdbcType=JdbcType.TINYINT),
+        @Result(column="recommend_state", property="recommendState", jdbcType=JdbcType.TINYINT),
+        @Result(column="reprint_state", property="reprintState", jdbcType=JdbcType.TINYINT),
+        @Result(column="create_time", property="createTime", jdbcType=JdbcType.TIMESTAMP)
+    })
+    List<Blog> selectByExample(BlogExample example);
+
     @Select({
         "select",
         "id, title, summary, publish_date, column_id, views, tags, comments, blog_imgs, ",
@@ -68,6 +116,15 @@ public interface BlogMapper {
         @Result(column="content", property="content", jdbcType=JdbcType.LONGVARBINARY)
     })
     Blog selectByPrimaryKey(Integer id);
+
+    @UpdateProvider(type=BlogSqlProvider.class, method="updateByExampleSelective")
+    int updateByExampleSelective(@Param("record") Blog record, @Param("example") BlogExample example);
+
+    @UpdateProvider(type=BlogSqlProvider.class, method="updateByExampleWithBLOBs")
+    int updateByExampleWithBLOBs(@Param("record") Blog record, @Param("example") BlogExample example);
+
+    @UpdateProvider(type=BlogSqlProvider.class, method="updateByExample")
+    int updateByExample(@Param("record") Blog record, @Param("example") BlogExample example);
 
     @UpdateProvider(type=BlogSqlProvider.class, method="updateByPrimaryKeySelective")
     int updateByPrimaryKeySelective(Blog record);

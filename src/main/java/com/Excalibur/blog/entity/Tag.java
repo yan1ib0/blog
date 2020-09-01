@@ -42,4 +42,14 @@ public class Tag {
     public void setCreateTime(Date createTime) {
         this.createTime = createTime;
     }
+
+    @Override
+    public String toString() {
+        return "Tag{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", blogCount='" + blogCount + '\'' +
+                ", createTime=" + createTime +
+                '}';
+    }
 }
