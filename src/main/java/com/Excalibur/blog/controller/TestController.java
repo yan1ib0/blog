@@ -9,4 +9,13 @@ public class TestController {
     public String testIndex(){
         return "test";
     }
+    @GetMapping("/login")
+    public String Login(){
+        return "admin/login";
+    }
+    @GetMapping("/index")
+    public String index(){
+        return "admin/manage";
+    }
+
 }
