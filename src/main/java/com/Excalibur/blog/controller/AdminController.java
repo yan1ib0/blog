@@ -43,8 +43,12 @@ public class AdminController {
     @PostMapping("/blogAdd")
     public String blogAdd(Blog blog) {
        int code= blogService.addBlog(blog);
-        System.out.println("插入状态 :: >>>>  "+code);
-        return "index";
+       if (code<1){
+           System.err.println("添加失败");
+           return "";
+       }
+        System.out.println("<<<< :: 插入博客成功 :: >>>>  "+code);
+        return "redirect:/index";
     }
 
 }
