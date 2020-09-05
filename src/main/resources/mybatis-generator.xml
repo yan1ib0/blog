@@ -38,8 +38,8 @@
             <property name="enableSubPackages" value="true"/>
         </javaClientGenerator>
         <!--生成对应表及类名-->
-<!--        <table tableName="blog_content" domainObjectName="Blog" enableCountByExample="true" enableUpdateByExample="true" enableDeleteByExample="false" enableSelectByExample="true" selectByExampleQueryId="true"></table>-->
-        <table tableName="columnis" domainObjectName="Column" enableCountByExample="true" enableUpdateByExample="true" enableDeleteByExample="false" enableSelectByExample="true" selectByExampleQueryId="true"></table>
+        <table tableName="blog_content" domainObjectName="Blog" enableCountByExample="true" enableUpdateByExample="true" enableDeleteByExample="false" enableSelectByExample="true" selectByExampleQueryId="true"></table>
+<!--        <table tableName="columnis" domainObjectName="Column" enableCountByExample="true" enableUpdateByExample="true" enableDeleteByExample="false" enableSelectByExample="true" selectByExampleQueryId="true"></table>-->
 <!--        <table tableName="tag" domainObjectName="Tag" enableCountByExample="true" enableUpdateByExample="true" enableDeleteByExample="false" enableSelectByExample="true" selectByExampleQueryId="true"></table>-->
 <!--        <table tableName="blog_user" domainObjectName="User" enableCountByExample="true" enableUpdateByExample="true" enableDeleteByExample="false" enableSelectByExample="true" selectByExampleQueryId="true"></table>-->
 <!--        <table tableName="comment" domainObjectName="Comment" enableCountByExample="true" enableUpdateByExample="true" enableDeleteByExample="false" enableSelectByExample="true" selectByExampleQueryId="true"></table>-->

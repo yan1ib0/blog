@@ -625,73 +625,73 @@ public class BlogExample {
             return (Criteria) this;
         }
 
-        public Criteria andBlogImgsIsNull() {
-            addCriterion("blog_imgs is null");
+        public Criteria andBlogImgIsNull() {
+            addCriterion("blog_img is null");
             return (Criteria) this;
         }
 
-        public Criteria andBlogImgsIsNotNull() {
-            addCriterion("blog_imgs is not null");
+        public Criteria andBlogImgIsNotNull() {
+            addCriterion("blog_img is not null");
             return (Criteria) this;
         }
 
-        public Criteria andBlogImgsEqualTo(String value) {
-            addCriterion("blog_imgs =", value, "blogImgs");
+        public Criteria andBlogImgEqualTo(String value) {
+            addCriterion("blog_img =", value, "blogImg");
             return (Criteria) this;
         }
 
-        public Criteria andBlogImgsNotEqualTo(String value) {
-            addCriterion("blog_imgs <>", value, "blogImgs");
+        public Criteria andBlogImgNotEqualTo(String value) {
+            addCriterion("blog_img <>", value, "blogImg");
             return (Criteria) this;
         }
 
-        public Criteria andBlogImgsGreaterThan(String value) {
-            addCriterion("blog_imgs >", value, "blogImgs");
+        public Criteria andBlogImgGreaterThan(String value) {
+            addCriterion("blog_img >", value, "blogImg");
             return (Criteria) this;
         }
 
-        public Criteria andBlogImgsGreaterThanOrEqualTo(String value) {
-            addCriterion("blog_imgs >=", value, "blogImgs");
+        public Criteria andBlogImgGreaterThanOrEqualTo(String value) {
+            addCriterion("blog_img >=", value, "blogImg");
             return (Criteria) this;
         }
 
-        public Criteria andBlogImgsLessThan(String value) {
-            addCriterion("blog_imgs <", value, "blogImgs");
+        public Criteria andBlogImgLessThan(String value) {
+            addCriterion("blog_img <", value, "blogImg");
             return (Criteria) this;
         }
 
-        public Criteria andBlogImgsLessThanOrEqualTo(String value) {
-            addCriterion("blog_imgs <=", value, "blogImgs");
+        public Criteria andBlogImgLessThanOrEqualTo(String value) {
+            addCriterion("blog_img <=", value, "blogImg");
             return (Criteria) this;
         }
 
-        public Criteria andBlogImgsLike(String value) {
-            addCriterion("blog_imgs like", value, "blogImgs");
+        public Criteria andBlogImgLike(String value) {
+            addCriterion("blog_img like", value, "blogImg");
             return (Criteria) this;
         }
 
-        public Criteria andBlogImgsNotLike(String value) {
-            addCriterion("blog_imgs not like", value, "blogImgs");
+        public Criteria andBlogImgNotLike(String value) {
+            addCriterion("blog_img not like", value, "blogImg");
             return (Criteria) this;
         }
 
-        public Criteria andBlogImgsIn(List<String> values) {
-            addCriterion("blog_imgs in", values, "blogImgs");
+        public Criteria andBlogImgIn(List<String> values) {
+            addCriterion("blog_img in", values, "blogImg");
             return (Criteria) this;
         }
 
-        public Criteria andBlogImgsNotIn(List<String> values) {
-            addCriterion("blog_imgs not in", values, "blogImgs");
+        public Criteria andBlogImgNotIn(List<String> values) {
+            addCriterion("blog_img not in", values, "blogImg");
             return (Criteria) this;
         }
 
-        public Criteria andBlogImgsBetween(String value1, String value2) {
-            addCriterion("blog_imgs between", value1, value2, "blogImgs");
+        public Criteria andBlogImgBetween(String value1, String value2) {
+            addCriterion("blog_img between", value1, value2, "blogImg");
             return (Criteria) this;
         }
 
-        public Criteria andBlogImgsNotBetween(String value1, String value2) {
-            addCriterion("blog_imgs not between", value1, value2, "blogImgs");
+        public Criteria andBlogImgNotBetween(String value1, String value2) {
+            addCriterion("blog_img not between", value1, value2, "blogImg");
             return (Criteria) this;
         }
 

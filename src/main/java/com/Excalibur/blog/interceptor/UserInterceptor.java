@@ -10,7 +10,7 @@ public class UserInterceptor  extends HandlerInterceptorAdapter {
 
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
-        User user=(User)request.getAttribute("user");
+        User user=(User)request.getSession().getAttribute("user");
         if(user == null) {
             response.sendRedirect("/login");
             return false;

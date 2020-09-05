@@ -14,7 +14,9 @@ import org.apache.ibatis.annotations.SelectProvider;
 import org.apache.ibatis.annotations.Update;
 import org.apache.ibatis.annotations.UpdateProvider;
 import org.apache.ibatis.type.JdbcType;
+import org.springframework.stereotype.Repository;
 
+@Repository
 public interface BlogMapper {
     @SelectProvider(type=BlogSqlProvider.class, method="countByExample")
     long countByExample(BlogExample example);
@@ -30,7 +32,7 @@ public interface BlogMapper {
         "summary, publish_date, ",
         "column_id, views, ",
         "tags, comments, ",
-        "blog_imgs, blog_state, ",
+        "blog_img, blog_state, ",
         "admire_state, comments_state, ",
         "recommend_state, reprint_state, ",
         "create_time, content)",
@@ -38,7 +40,7 @@ public interface BlogMapper {
         "#{summary,jdbcType=VARCHAR}, #{publishDate,jdbcType=TIMESTAMP}, ",
         "#{columnId,jdbcType=INTEGER}, #{views,jdbcType=INTEGER}, ",
         "#{tags,jdbcType=VARCHAR}, #{comments,jdbcType=VARCHAR}, ",
-        "#{blogImgs,jdbcType=VARCHAR}, #{blogState,jdbcType=TINYINT}, ",
+        "#{blogImg,jdbcType=VARCHAR}, #{blogState,jdbcType=TINYINT}, ",
         "#{admireState,jdbcType=TINYINT}, #{commentsState,jdbcType=TINYINT}, ",
         "#{recommendState,jdbcType=TINYINT}, #{reprintState,jdbcType=TINYINT}, ",
         "#{createTime,jdbcType=TIMESTAMP}, #{content,jdbcType=LONGVARBINARY})"
@@ -58,7 +60,7 @@ public interface BlogMapper {
         @Result(column="views", property="views", jdbcType=JdbcType.INTEGER),
         @Result(column="tags", property="tags", jdbcType=JdbcType.VARCHAR),
         @Result(column="comments", property="comments", jdbcType=JdbcType.VARCHAR),
-        @Result(column="blog_imgs", property="blogImgs", jdbcType=JdbcType.VARCHAR),
+        @Result(column="blog_img", property="blogImg", jdbcType=JdbcType.VARCHAR),
         @Result(column="blog_state", property="blogState", jdbcType=JdbcType.TINYINT),
         @Result(column="admire_state", property="admireState", jdbcType=JdbcType.TINYINT),
         @Result(column="comments_state", property="commentsState", jdbcType=JdbcType.TINYINT),
@@ -79,7 +81,7 @@ public interface BlogMapper {
         @Result(column="views", property="views", jdbcType=JdbcType.INTEGER),
         @Result(column="tags", property="tags", jdbcType=JdbcType.VARCHAR),
         @Result(column="comments", property="comments", jdbcType=JdbcType.VARCHAR),
-        @Result(column="blog_imgs", property="blogImgs", jdbcType=JdbcType.VARCHAR),
+        @Result(column="blog_img", property="blogImg", jdbcType=JdbcType.VARCHAR),
         @Result(column="blog_state", property="blogState", jdbcType=JdbcType.TINYINT),
         @Result(column="admire_state", property="admireState", jdbcType=JdbcType.TINYINT),
         @Result(column="comments_state", property="commentsState", jdbcType=JdbcType.TINYINT),
@@ -91,7 +93,7 @@ public interface BlogMapper {
 
     @Select({
         "select",
-        "id, title, summary, publish_date, column_id, views, tags, comments, blog_imgs, ",
+        "id, title, summary, publish_date, column_id, views, tags, comments, blog_img, ",
         "blog_state, admire_state, comments_state, recommend_state, reprint_state, create_time, ",
         "content",
         "from blog_content",
@@ -106,7 +108,7 @@ public interface BlogMapper {
         @Result(column="views", property="views", jdbcType=JdbcType.INTEGER),
         @Result(column="tags", property="tags", jdbcType=JdbcType.VARCHAR),
         @Result(column="comments", property="comments", jdbcType=JdbcType.VARCHAR),
-        @Result(column="blog_imgs", property="blogImgs", jdbcType=JdbcType.VARCHAR),
+        @Result(column="blog_img", property="blogImg", jdbcType=JdbcType.VARCHAR),
         @Result(column="blog_state", property="blogState", jdbcType=JdbcType.TINYINT),
         @Result(column="admire_state", property="admireState", jdbcType=JdbcType.TINYINT),
         @Result(column="comments_state", property="commentsState", jdbcType=JdbcType.TINYINT),
@@ -138,7 +140,7 @@ public interface BlogMapper {
           "views = #{views,jdbcType=INTEGER},",
           "tags = #{tags,jdbcType=VARCHAR},",
           "comments = #{comments,jdbcType=VARCHAR},",
-          "blog_imgs = #{blogImgs,jdbcType=VARCHAR},",
+          "blog_img = #{blogImg,jdbcType=VARCHAR},",
           "blog_state = #{blogState,jdbcType=TINYINT},",
           "admire_state = #{admireState,jdbcType=TINYINT},",
           "comments_state = #{commentsState,jdbcType=TINYINT},",
@@ -159,7 +161,7 @@ public interface BlogMapper {
           "views = #{views,jdbcType=INTEGER},",
           "tags = #{tags,jdbcType=VARCHAR},",
           "comments = #{comments,jdbcType=VARCHAR},",
-          "blog_imgs = #{blogImgs,jdbcType=VARCHAR},",
+          "blog_img = #{blogImg,jdbcType=VARCHAR},",
           "blog_state = #{blogState,jdbcType=TINYINT},",
           "admire_state = #{admireState,jdbcType=TINYINT},",
           "comments_state = #{commentsState,jdbcType=TINYINT},",

@@ -27,6 +27,7 @@ public class UserController {
         session.setAttribute("user",user);
         return "redirect:/index";
     }
+
     @GetMapping("/logout")
     public String logout(HttpSession session){
         session.removeAttribute("user");

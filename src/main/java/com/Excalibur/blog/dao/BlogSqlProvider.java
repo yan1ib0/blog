@@ -53,8 +53,8 @@ public class BlogSqlProvider {
             sql.VALUES("comments", "#{comments,jdbcType=VARCHAR}");
         }
         
-        if (record.getBlogImgs() != null) {
-            sql.VALUES("blog_imgs", "#{blogImgs,jdbcType=VARCHAR}");
+        if (record.getBlogImg() != null) {
+            sql.VALUES("blog_img", "#{blogImg,jdbcType=VARCHAR}");
         }
         
         if (record.getBlogState() != null) {
@@ -102,7 +102,7 @@ public class BlogSqlProvider {
         sql.SELECT("views");
         sql.SELECT("tags");
         sql.SELECT("comments");
-        sql.SELECT("blog_imgs");
+        sql.SELECT("blog_img");
         sql.SELECT("blog_state");
         sql.SELECT("admire_state");
         sql.SELECT("comments_state");
@@ -134,7 +134,7 @@ public class BlogSqlProvider {
         sql.SELECT("views");
         sql.SELECT("tags");
         sql.SELECT("comments");
-        sql.SELECT("blog_imgs");
+        sql.SELECT("blog_img");
         sql.SELECT("blog_state");
         sql.SELECT("admire_state");
         sql.SELECT("comments_state");
@@ -190,8 +190,8 @@ public class BlogSqlProvider {
             sql.SET("comments = #{record.comments,jdbcType=VARCHAR}");
         }
         
-        if (record.getBlogImgs() != null) {
-            sql.SET("blog_imgs = #{record.blogImgs,jdbcType=VARCHAR}");
+        if (record.getBlogImg() != null) {
+            sql.SET("blog_img = #{record.blogImg,jdbcType=VARCHAR}");
         }
         
         if (record.getBlogState() != null) {
@@ -238,7 +238,7 @@ public class BlogSqlProvider {
         sql.SET("views = #{record.views,jdbcType=INTEGER}");
         sql.SET("tags = #{record.tags,jdbcType=VARCHAR}");
         sql.SET("comments = #{record.comments,jdbcType=VARCHAR}");
-        sql.SET("blog_imgs = #{record.blogImgs,jdbcType=VARCHAR}");
+        sql.SET("blog_img = #{record.blogImg,jdbcType=VARCHAR}");
         sql.SET("blog_state = #{record.blogState,jdbcType=TINYINT}");
         sql.SET("admire_state = #{record.admireState,jdbcType=TINYINT}");
         sql.SET("comments_state = #{record.commentsState,jdbcType=TINYINT}");
@@ -264,7 +264,7 @@ public class BlogSqlProvider {
         sql.SET("views = #{record.views,jdbcType=INTEGER}");
         sql.SET("tags = #{record.tags,jdbcType=VARCHAR}");
         sql.SET("comments = #{record.comments,jdbcType=VARCHAR}");
-        sql.SET("blog_imgs = #{record.blogImgs,jdbcType=VARCHAR}");
+        sql.SET("blog_img = #{record.blogImg,jdbcType=VARCHAR}");
         sql.SET("blog_state = #{record.blogState,jdbcType=TINYINT}");
         sql.SET("admire_state = #{record.admireState,jdbcType=TINYINT}");
         sql.SET("comments_state = #{record.commentsState,jdbcType=TINYINT}");
@@ -309,8 +309,8 @@ public class BlogSqlProvider {
             sql.SET("comments = #{comments,jdbcType=VARCHAR}");
         }
         
-        if (record.getBlogImgs() != null) {
-            sql.SET("blog_imgs = #{blogImgs,jdbcType=VARCHAR}");
+        if (record.getBlogImg() != null) {
+            sql.SET("blog_img = #{blogImg,jdbcType=VARCHAR}");
         }
         
         if (record.getBlogState() != null) {

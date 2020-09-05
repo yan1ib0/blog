@@ -14,7 +14,9 @@ import org.apache.ibatis.annotations.SelectProvider;
 import org.apache.ibatis.annotations.Update;
 import org.apache.ibatis.annotations.UpdateProvider;
 import org.apache.ibatis.type.JdbcType;
+import org.springframework.stereotype.Repository;
 
+@Repository
 public interface CommentMapper {
     @SelectProvider(type=CommentSqlProvider.class, method="countByExample")
     long countByExample(CommentExample example);

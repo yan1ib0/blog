@@ -20,7 +20,7 @@ public class Blog {
 
     private String comments;
 
-    private String blogImgs;
+    private String blogImg;
 
     private Byte blogState;
 
@@ -100,12 +100,12 @@ public class Blog {
         this.comments = comments == null ? null : comments.trim();
     }
 
-    public String getBlogImgs() {
-        return blogImgs;
+    public String getBlogImg() {
+        return blogImg;
     }
 
-    public void setBlogImgs(String blogImgs) {
-        this.blogImgs = blogImgs == null ? null : blogImgs.trim();
+    public void setBlogImg(String blogImg) {
+        this.blogImg = blogImg == null ? null : blogImg.trim();
     }
 
     public Byte getBlogState() {
@@ -175,7 +175,7 @@ public class Blog {
                 ", views=" + views +
                 ", tags='" + tags + '\'' +
                 ", comments='" + comments + '\'' +
-                ", blogImgs='" + blogImgs + '\'' +
+                ", blogImg='" + blogImg + '\'' +
                 ", blogState=" + blogState +
                 ", admireState=" + admireState +
                 ", commentsState=" + commentsState +

@@ -4153,7 +4153,7 @@ li.L9 {
   /* IE9+, News */
 }
 .editormd-preview-container .editormd-toc-menu > .markdown-toc li > ul:before, .editormd-preview-container .editormd-toc-menu > .markdown-toc li > ul:after, .editormd-html-preview .editormd-toc-menu > .markdown-toc li > ul:before, .editormd-html-preview .editormd-toc-menu > .markdown-toc li > ul:after {
-  pointer-events: pointer-events;
+  pointer-events: painted;
   position: absolute;
   left: 15px;
   top: -6px;
