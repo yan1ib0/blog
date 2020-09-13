@@ -19,4 +19,8 @@ public class ColumnServiceImpl implements ColumnService {
         List<Column> columns=columnMapper.selectByExample(columnExample);
         return columns;
     }
+
+    public Column getColumnById(Integer id) {
+        return columnMapper.selectByPrimaryKey(id);
+    }
 }

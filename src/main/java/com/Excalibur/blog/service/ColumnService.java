@@ -6,4 +6,5 @@ import java.util.List;
 
 public interface ColumnService {
     List<Column> getAll();
+    Column getColumnById(Integer id);
 }

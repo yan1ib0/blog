@@ -16,7 +16,7 @@
     <div class="ui container">
         <div class="ui inverted secondary menu stackable">
             <h2 class="ui teal header item">管理后台</h2>
-            <a th:href="@{/admin/index}" class="m-item  item m-mobile-hide" ><i class="home icon"></i>博客</a>
+            <a th:href="@{/index}" class="m-item  item m-mobile-hide" ><i class="home icon"></i>博客</a>
             <a th:href="@{/admin/columnistPage}" class="m-item item m-mobile-hide" ><i class="idea icon"></i>分类</a>
             <a href="/admin/tags" class="m-item item m-mobile-hide" ><i class="tags icon"></i>标签</a>
             <a href="/admin/comments" class="m-item item m-mobile-hide" ><i class="comment icon"></i>评论管理</a>
@@ -58,7 +58,8 @@
                         <i class="ui dropdown icon"></i>
                         <div class="default text">分类</div>
                         <div class="menu">
-                            <div class="item"></div>
+                            <div class="item" th:each="type,iterStat:${columns}" th:data-value="${type.getId()}"
+                                 th:text="${type.getName()}"></div>
                         </div>
                     </div>
                 </div>
@@ -70,29 +71,28 @@
             </div>
         </div>
         <div id="table-container">
-            <table th:fragment="table_refresh" th:id="id_table_refresh" class="ui table inverted celled center aligned">
+            <table  th:fragment="table_refresh" th:id="id_table_refresh" class="ui table inverted celled center aligned">
                 <thread>
                     <tr>
-                        <th></th>
+                        <th>id</th>
                         <th>标题</th>
                         <th>分类</th>
-                        <th>更新时间</th>
+                        <th>创建时间</th>
                         <th>状态</th>
                         <th>操作</th>
                     </tr>
                 </thread>
                 <tbody>
-                <tr >
+                <tr th:each="blog,iterStat:${pageInfo.getList()}">
                     <input type="hidden" name="maxPage" >
-                    <td >1</td>
-                    <td >【一年总结】记我的大一生活</td>
-                    <!--                    th:text="${blog.getType().getName()}"-->
-                    <td>一年总结</td>
-                    <td >2020-7-04 15:12</td>
-                    <!--                    <td th:text="${blog.getBlogState()==0}?'草稿':'已发布'">草稿</td>-->
-                    <td >草稿</td>
-                    <td >已发布</td>
-                    <td >已删除</td>
+                    <td th:text="${blog.getId()}">1</td>
+                    <td  th:text="${blog.getTitle()}">【一年总结】记我的大一生活</td>
+                    <td th:text="${blog.getSummary()}">一年总结</td>
+                    <td th:text="${blog.getCreateTime()}">2020-7-04 15:12</td>
+                    <td th:text="${blog.getBlogState()==0}?'草稿':'已发布'">草稿</td>
+<!--                    <td >草稿</td>-->
+<!--                    <td >已发布</td>-->
+<!--                    <td >已删除</td>-->
 
                     <td>
                         <a class="ui button  teal basic mini " >编辑</a>
@@ -173,13 +173,16 @@
             url: "/admin/findCondition",
             // type 专栏 分类
             data: {"pageNum": pageNum, title: $("[name='title']").val(), columnId: $("[name='columnId']").val(),},
-            type: "get",
+            type: "post",
             success: function (result) {
-
                 // 只刷新博客展示部分，其他地方不变
                 // ajax返回数据的时候，页面模板只需要返回对应数据片段就可以
-                $("#table-container").html(result);
-            }
+                $("#id_table_refresh").html(result);
+            },
+            error: function (errorMsg) {
+            //请求失败时执行该函数
+            alert("请求失败!");
+        }
         })
     }
 
@@ -192,11 +195,10 @@
             },
             type: "delete",
             success: function (result) {
-                $("#table-container").html(result);
+                $("#id_table_refresh").html(result);
             }
         })
     }
-
 
 </script>
 </body>

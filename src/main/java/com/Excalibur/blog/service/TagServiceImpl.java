@@ -14,12 +14,8 @@ public class TagServiceImpl implements TagService {
     TagMapper tagMapper;
     public List<Tag> getAll() {
         Tag tag=new Tag();
-        tag.setBlogCount("1");
         TagExample tagExample=new TagExample();
         TagExample.Criteria criteria=tagExample.createCriteria();
-        if(StringUtils.isNotBlank(tag.getBlogCount())){
-            criteria.andBlogCountEqualTo(tag.getBlogCount());
-        }
         List<Tag> tags = tagMapper.selectByExample(tagExample);
         return tags;
     }

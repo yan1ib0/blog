@@ -25,7 +25,7 @@ public class UserController {
             return "admin/login";
         }
         session.setAttribute("user",user);
-        return "redirect:/index";
+        return "redirect:/admin/index";
     }
 
     @GetMapping("/logout")

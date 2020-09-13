@@ -26,3 +26,6 @@ spring:
     cache: false
 server:
   port: 8878
+logging:
+  level:
+    com.Excalibur.dao: debug

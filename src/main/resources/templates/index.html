@@ -51,62 +51,66 @@
                             <h3 class="ui header teal">博客</h3>
                         </div>
                         <div class="column right aligned">
-                            共<h2 class="ui orange header m-inline-block mth">&nbsp;14&nbsp; </h2>篇
+                            共<h2 class="ui orange header m-inline-block mth" th:text="${blogs.size()}">
+                            &nbsp;14&nbsp; </h2>篇
                         </div>
                     </div>
                 </div>
                 <!--列表-->
-                <div class="ui attached segment ">
-                    <!--                        <div th:if="${blogs.size()==0}"><h2>没有更多的博客啦！不过未来说不定会有哦！QAQ</h2></div>-->
-                    <div><h2>没有更多的博客啦！不过未来说不定会有哦！QAQ</h2></div>
-                    <div class="ui padded segment vertical m-padded-b-small m-mobile-clear"
-                         >
-                        <div class="ui grid mobile reversed stackable">
-                            <div class="ui eleven wide column">
-                                <a th:href="@{'/page_blog/'} " target="_blank">
-                                    <h3 class="ui header">【一年总结】记我的大一生活</h3>
-                                </a>
+                <div id="table-container">
+                    <div class="ui attached segment " th:fragment="table_refresh">
+                        <input type="hidden" name="maxPage" th:value="${pageInfo.getPages()}">
+                        <div th:if="${pageInfo.getSize()==0}"><h2>没有更多的博客啦！不过未来说不定会有哦！QAQ</h2></div>
+                        <div class="ui padded segment vertical m-padded-b-small m-mobile-clear"
+                             th:each="blog,iter:${pageInfo.getList()}">
+                            <div class="ui grid mobile reversed stackable">
+                                <div class="ui eleven wide column">
+                                    <a th:href="@{'/blogPage/'+${blog.getId()}} " target="_blank">
+                                        <h3 class="ui header" th:text="${blog.getTitle()}"></h3>
+                                    </a>
 
-                                <p class="m-text-thin m-text-lined m-text-spaced">
-                                    去年夏天，平平无奇的我过着平平无奇的生活。一年之后，依旧是那个夏天，依旧是那个我，只是此时的我成了别人口中的“大佬”。而同是参加软件创新实验室的集训，别人是听课的那个，而我是讲课的那个。我感慨无限，是啊，奋斗真的可以改变人呢！</p>
-                                <div class="ui grid">
-                                    <div class="eleven wide column">
-                                        <div class="ui list horizontal link mini ">
-                                            <div class="item">
-                                                <img src="/images/icon.jpg" class="ui avatar image">
-                                                <div class="content"><a href="#" class="header ">追梦</a></div>
-                                            </div>
-                                            <div class="item">
-                                                <i class="calendar icon"></i><span>2020-7-04</span>
-                                            </div>
-                                            <div class="item">
-                                                <i class="eye icon"></i><span>3012</span>
+                                    <p class="m-text-thin m-text-lined m-text-spaced" th:text="${blog.getSummary()}">
+                                    <div class="ui grid">
+                                        <div class="eleven wide column">
+                                            <div class="ui list horizontal link mini ">
+                                                <div class="item">
+                                                    <img th:src="@{/images/icon.jpg}" class="ui avatar image">
+                                                    <div class="content"><a href="#" class="header ">渡一</a></div>
+                                                </div>
+                                                <div class="item">
+                                                    <i class="calendar icon"></i><span
+                                                        th:text="${#dates.format(blog.getPublishDate(),'yyyy-MM-dd')}">2020-7-04</span>
+                                                </div>
+                                                <div class="item">
+                                                    <i class="eye icon"></i><span
+                                                        th:text="${blog.getViews()}">3012</span>
+                                                </div>
                                             </div>
                                         </div>
-                                    </div>
-                                    <div class="five wide column right aligned ">
-                                        <a th:href="@{'/page_types?typeId='}" target="_blank"
-                                           class="ui label teal basic m-padded-tiny">一年总结</a>
+                                        <div class="five wide column right aligned ">
+                                            <a th:href="@{'/page_types?typeId='}" target="_blank"
+                                               class="ui label teal basic m-padded-tiny Columnist"
+                                            th:text="${columns.get(pageInfo.getList().indexOf(blog)).getName()}">默认分类</a>
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
-                            <div class="ui five wide column m-padded-tb-large">
+                                <div class="ui five wide column m-padded-tb-large">
 
-                                <a th:href="@{'/page_blog/'}" target="_blank">
-                                    <img class="ui round image ">
-                                </a>
+                                    <a th:href="@{'/page_blog/'}" target="_blank">
+                                        <img class="ui round image ">
+                                    </a>
+                                </div>
                             </div>
+
                         </div>
 
                     </div>
-
                 </div>
-
                 <!--底部-->
                 <div class="ui bottom attached segment">
                     <div class="ui middle aligned grid two column">
                         <div class="column">
-                            <a class="ui button basic mini teal">上一页</a>
+                            <a class="ui button basic mini teal" th:href="@{}">上一页</a>
                         </div>
                         <div class="column right aligned">
                             <a class="ui button basic mini teal">下一页</a>
@@ -233,6 +237,7 @@
     $("#b1").click(function () {
         $(".m-item").toggleClass("m-mobile-hide");
     });
+
 </script>
 </body>
 </html>
