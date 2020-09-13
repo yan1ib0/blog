@@ -9,5 +9,5 @@ public interface BlogService {
     Integer addBlog(Blog blog);
     List<Blog> getAll();
     PageInfo<Blog> findCondition(Integer pageNum,Blog blog);
-    PageInfo<Blog> getBlogPaging();
+    PageInfo<Blog> getBlogPaging(Integer pageNum);
 }

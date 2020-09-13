@@ -40,17 +40,11 @@ public class TestController {
         return "admin/login";
     }
 
-    @GetMapping("/index")
+    @GetMapping("/")
     public String Index(Model model) {
         List<Blog> blogs=blogService.getAll();
-        List<Column> columns =new ArrayList<Column>();
-        PageInfo<Blog> blogPageInfo=blogService.getBlogPaging();
-        Iterator<Blog> it=blogPageInfo.getList().iterator();
-        while(it.hasNext()){
-            Column column=columnService.getColumnById(it.next().getColumnId());
-            columns.add(column);
-        }
-        model.addAttribute("columns",columns);
+        PageInfo<Blog> blogPageInfo=blogService.getBlogPaging(1);
+        model.addAttribute("columns",columnService.getAll());
         model.addAttribute("blogs",blogs);
         model.addAttribute("pageInfo",blogPageInfo);
         return "index";
@@ -62,5 +56,13 @@ public class TestController {
         System.out.println(column.getName());
         return column.getName();
     }
-
+    @PostMapping("/findAll")
+    public String show(Integer pageNum, Model model) {
+        System.out.println("控制层");
+        Blog blog = new Blog();
+        PageInfo<Blog> pageInfo = blogService.getBlogPaging(pageNum);
+        model.addAttribute("columns", columnService.getAll());
+        model.addAttribute("pageInfo", pageInfo);
+        return "index::table_refresh";
+    }
 }

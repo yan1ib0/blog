@@ -40,28 +40,33 @@ public class BlogServiceImpl implements BlogService {
     }
 
     public PageInfo<Blog> findCondition(Integer pageNum,Blog blog) {
-        PageHelper.startPage(pageNum,2);
-        System.out.println(pageNum);
+        PageHelper.startPage(pageNum,5);
+        System.out.println("第"+pageNum+"页");
         BlogExample blogExample = new BlogExample();
         BlogExample.Criteria criteria=blogExample.createCriteria();
         if(StringUtils.isNotBlank(blog.getTitle())){
             criteria.andTitleLike("%"+blog.getTitle()+"%");
         }
-        if(StringUtils.isNotBlank(blog.getColumnId().toString())){
+        if(StringUtils.isNotBlank(blog.getColumnId()==null?"":blog.getColumnId().toString())){
             criteria.andColumnIdEqualTo(blog.getColumnId());
         }
         List<Blog> blogs = blogMapper.selectByExample(blogExample);
-        Iterator<Blog> it= blogs.iterator();
         PageInfo<Blog> pageInfo=new PageInfo<Blog>(blogs);
         return pageInfo;
     }
 
-    public PageInfo<Blog> getBlogPaging() {
-        PageHelper.startPage(1,2);
+
+    public PageInfo<Blog> getBlogPaging(Integer pageNum) {
+        System.out.println("服务层");
+        PageHelper.startPage(pageNum,5);
         Blog blog = new Blog();
         BlogExample blogExample = new BlogExample();
         List<Blog> blogs = blogMapper.selectByExample(blogExample);
         PageInfo<Blog> pageInfo=new PageInfo<Blog>(blogs);
+        Iterator<Blog> it=pageInfo.getList().iterator();
+        while (it.hasNext()){
+            System.out.println(it.next());
+        }
         return pageInfo;
     }
 

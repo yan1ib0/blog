@@ -58,11 +58,12 @@
                 </div>
                 <!--列表-->
                 <div id="table-container">
-                    <div class="ui attached segment " th:fragment="table_refresh">
+                    <div class="ui attached segment " th:fragment="table_refresh" id="id_table_refresh">
                         <input type="hidden" name="maxPage" th:value="${pageInfo.getPages()}">
                         <div th:if="${pageInfo.getSize()==0}"><h2>没有更多的博客啦！不过未来说不定会有哦！QAQ</h2></div>
                         <div class="ui padded segment vertical m-padded-b-small m-mobile-clear"
                              th:each="blog,iter:${pageInfo.getList()}">
+                            <input type="hidden" name="maxPage" th:value="${pageInfo.getPages()}">
                             <div class="ui grid mobile reversed stackable">
                                 <div class="ui eleven wide column">
                                     <a th:href="@{'/blogPage/'+${blog.getId()}} " target="_blank">
@@ -90,7 +91,7 @@
                                         <div class="five wide column right aligned ">
                                             <a th:href="@{'/page_types?typeId='}" target="_blank"
                                                class="ui label teal basic m-padded-tiny Columnist"
-                                            th:text="${columns.get(pageInfo.getList().indexOf(blog)).getName()}">默认分类</a>
+                                            th:text="${columns.get(blog.getColumnId()-1).getName()}">默认分类</a>
                                         </div>
                                     </div>
                                 </div>
@@ -110,10 +111,10 @@
                 <div class="ui bottom attached segment">
                     <div class="ui middle aligned grid two column">
                         <div class="column">
-                            <a class="ui button basic mini teal" th:href="@{}">上一页</a>
+                            <a class="ui button basic mini teal" onclick="pre()">上一页</a>
                         </div>
                         <div class="column right aligned">
-                            <a class="ui button basic mini teal">下一页</a>
+                            <a class="ui button basic mini teal" onclick="next()">下一页</a>
                         </div>
                     </div>
                 </div>
@@ -237,7 +238,47 @@
     $("#b1").click(function () {
         $(".m-item").toggleClass("m-mobile-hide");
     });
+    // 页面默认数据
+    var pageNum = 1;
 
+
+
+    function next() {
+        if (pageNum >= $("[name='maxPage']").val()) {
+
+
+            return;
+        }
+        pageNum++;
+        loadData();
+    }
+
+    function pre() {
+        if (pageNum <= 1) {
+            pageNum = 1;
+            return;
+        }
+        pageNum--;
+        loadData();
+    }
+
+    function loadData() {
+        $.ajax({
+            url: "/findAll",
+            // type 专栏 分类
+            data: {"pageNum": pageNum},
+            type: "post",
+            success: function (result) {
+                // 只刷新博客展示部分，其他地方不变
+                // ajax返回数据的时候，页面模板只需要返回对应数据片段就可以
+                $("#id_table_refresh").html(result);
+            },
+            error: function (errorMsg) {
+                //请求失败时执行该函数
+                alert("请求失败!");
+            }
+        })
+    }
 </script>
 </body>
 </html>

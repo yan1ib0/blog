@@ -13,26 +13,27 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+
 import java.util.List;
 
-    @RequestMapping("/admin")
-    @Controller
-    public class AdminController {
+@RequestMapping("/admin")
+@Controller
+public class AdminController {
 
-        @Autowired      //分类
-        ColumnService columnService;
+    @Autowired      //分类
+            ColumnService columnService;
 
-        @Autowired
-        TagService tagService;
+    @Autowired
+    TagService tagService;
 
-        @Autowired
-        BlogService blogService;
+    @Autowired
+    BlogService blogService;
 
     @GetMapping("/index")
-    public String index(Model model){
-        model.addAttribute("columns",columnService.getAll());
-        model.addAttribute("tags",tagService.getAll());
-        model.addAttribute("pageInfo",blogService.getBlogPaging());
+    public String index(Model model) {
+        model.addAttribute("columns", columnService.getAll());
+        model.addAttribute("tags", tagService.getAll());
+        model.addAttribute("pageInfo", blogService.getBlogPaging(1));
         return "admin/manage";
     }
 
@@ -47,18 +48,21 @@ import java.util.List;
 
     @PostMapping("/blogAdd")
     public String blogAdd(Blog blog) {
-       int code= blogService.addBlog(blog);
-       if (code<1){
-           System.err.println("添加失败");
-       }
-        System.out.println("<<<< :: 插入博客成功 :: >>>>  "+code);
+        int code = blogService.addBlog(blog);
+        if (code < 1) {
+            System.err.println("添加失败");
+        }
+        System.out.println("<<<< :: 插入博客成功 :: >>>>  " + code);
         return "redirect:/admin/index";
     }
 
     @PostMapping("/findCondition")
-    public String search(Integer pageNum,Blog blog,Model model){
-        PageInfo<Blog> pageInfo=blogService.findCondition(pageNum,blog);
-        model.addAttribute("pageInfo",pageInfo);
-            return "admin/manage::table_refresh";
+    public String search(Integer pageNum, Blog blog, Model model) {
+        PageInfo<Blog> pageInfo = blogService.findCondition(pageNum, blog);
+        model.addAttribute("columns", columnService.getAll());
+        model.addAttribute("pageInfo", pageInfo);
+        return "admin/manage::table_refresh";
     }
+
+
 }
