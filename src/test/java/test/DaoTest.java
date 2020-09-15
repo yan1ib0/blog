@@ -93,6 +93,15 @@ public class DaoTest {
             System.out.println(it.next());
         }
     }
+    @Test
+    public void FindOneBlog(){
+        Blog blog = new Blog();
+        BlogExample blogExample = new BlogExample();
+        BlogExample.Criteria criteria=blogExample.createCriteria();
+        criteria.andIdEqualTo(11);
+        List<Blog> blogs= blogMapper.selectByExampleWithBLOBs(blogExample);
+        System.out.println(new  String(blogs.get(0).getContent()));
+    }
 }
 
 

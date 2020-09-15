@@ -53,10 +53,10 @@
             <div class="field required">
                 <input type="text" name="summary" class="ui input" placeholder="摘要" th:value="${blog?.getSummary()}">
             </div>
-            <input id="content" th:value="${blog?.getContent()}" type="hidden">
+            <input id="content" th:value="${content}" type="hidden">
             <div class="field">
                 <div id="md-content" style="z-index: 1 !important;">
-                    <textarea name="content" placeholder="博客内容" th:text="${blog?.getContent()}"></textarea>
+                    <textarea name="content" placeholder="博客内容" th:text="${content}"></textarea>
                     [TOC]
                     #### Disabled options
 
@@ -94,7 +94,7 @@
                         <i class="ui dropdown icon"></i>
                         <div class="default text">分类</div>
                         <div class="menu">
-                            <div class="item" th:each="c,iterStat:${cList}" th:data-value="${c?.getId()}"
+                            <div class="item" th:each="c,iterStat:${columns}" th:data-value="${c?.getId()}"
                                  th:text="${c?.getName()}"></div>
                         </div>
                     </div>
@@ -107,7 +107,7 @@
                         <i class="ui dropdown icon"></i>
                         <div class="default text">标签</div>
                         <div class="menu">
-                            <div class="item" th:each="tag,iterStat:${tList}" th:data-value="${tag?.getId()}"
+                            <div class="item" th:each="tag,iterStat:${tags}" th:data-value="${tag?.getId()}"
                                  th:text="${tag?.getName()}"></div>
                         </div>
                     </div>
@@ -140,7 +140,7 @@
                     </div>
                     <div class="ui checkbox">
                         <input type="checkbox" id="comment" name="commentState" value="1" class="hidden"
-                               th:checked="${blog?.getCommentState()}">
+                               th:checked="${blog?.getCommentsState()}">
                         <label for="comment">留言</label>
                     </div>
                 </div>

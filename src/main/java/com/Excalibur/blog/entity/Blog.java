@@ -1,6 +1,7 @@
 package com.Excalibur.blog.entity;
 
-import java.util.Arrays;
+import com.Excalibur.blog.Util.BlobUtil;
+
 import java.util.Date;
 
 public class Blog {
@@ -163,7 +164,7 @@ public class Blog {
     public void setContent(byte[] content) {
         this.content = content;
     }
-
+    String string= String.valueOf(content==null?content:content.toString());
     @Override
     public String toString() {
         return "Blog{" +
@@ -182,7 +183,7 @@ public class Blog {
                 ", recommendState=" + recommendState +
                 ", reprintState=" + reprintState +
                 ", createTime=" + createTime +
-                ", content=" + Arrays.toString(content) +
+                ", content=" + string +
                 '}';
     }
 }

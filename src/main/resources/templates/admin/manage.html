@@ -16,10 +16,10 @@
     <div class="ui container">
         <div class="ui inverted secondary menu stackable">
             <h2 class="ui teal header item">管理后台</h2>
-            <a th:href="@{/index}" class="m-item  item m-mobile-hide" ><i class="home icon"></i>博客</a>
-            <a th:href="@{/admin/columnistPage}" class="m-item item m-mobile-hide" ><i class="idea icon"></i>分类</a>
-            <a href="/admin/tags" class="m-item item m-mobile-hide" ><i class="tags icon"></i>标签</a>
-            <a href="/admin/comments" class="m-item item m-mobile-hide" ><i class="comment icon"></i>评论管理</a>
+            <a th:href="@{/index}" class="m-item  item m-mobile-hide"><i class="home icon"></i>博客</a>
+            <a th:href="@{/admin/columnistPage}" class="m-item item m-mobile-hide"><i class="idea icon"></i>分类</a>
+            <a href="/admin/tags" class="m-item item m-mobile-hide"><i class="tags icon"></i>标签</a>
+            <a href="/admin/comments" class="m-item item m-mobile-hide"><i class="comment icon"></i>评论管理</a>
             <div class="right menu">
                 <div class="ui dropdown item m-item m-mobile-hide">
                     <img th:src="@{/images/icon.jpg}" class="ui avatar image">
@@ -58,7 +58,7 @@
                         <i class="ui dropdown icon"></i>
                         <div class="default text">分类</div>
                         <div class="menu">
-                            <div class="item"  th:each="type,iterStat:${columns}" th:data-value="${type.getId()}"
+                            <div class="item" th:each="type,iterStat:${columns}" th:data-value="${type.getId()}"
                                  th:text="${type.getName()}">
                             </div>
 
@@ -73,7 +73,7 @@
             </div>
         </div>
         <div id="table-container">
-            <table  th:fragment="table_refresh" th:id="id_table_refresh" class="ui table inverted celled center aligned">
+            <table th:fragment="table_refresh" th:id="id_table_refresh" class="ui table inverted celled center aligned">
                 <thread>
                     <tr>
                         <th>编号</th>
@@ -91,14 +91,16 @@
                     <td th:text="${blog.getTitle()}">【一年总结】记我的大一生活</td>
                     <td th:text="${columns.get(blog.getColumnId()-1).getName()}">一年总结</td>
                     <td th:text="${#dates.format(blog.getCreateTime(),'yyyy-MM-dd')}">2020-7-04 15:12</td>
-                    <td th:text="${blog.getBlogState()==0}?'草稿':'已发布'">草稿</td>
-<!--                    <td >草稿</td>-->
-<!--                    <td >已发布</td>-->
-<!--                    <td >已删除</td>-->
+<!--                    <td th:text="${blog.getBlogState()==0}?'草稿':'已发布'">草稿</td>-->
+                                        <td th:if="${blog.getBlogState()==0}" >草稿</td>
+                                        <td th:if="${blog.getBlogState()==1}">已发布</td>
+                                        <td th:if="${blog.getBlogState()==-1}">已删除</td>
+                    <input type="hidden" name="Blogid" th:value="${blog.getId()}"/>
+
 
                     <td>
-                        <a class="ui button  teal basic mini " >编辑</a>
-                        <button class="ui button  red basic mini "
+                        <a class="ui button  teal basic mini " th:href="@{'/admin/editBlogPage/'+${blog.getId()}}">编辑</a>
+                        <button class="ui button  red basic mini " th:attr="data-id=${blog.getId()}"
                                 onclick="deleteBlog(this)">删除
                         </button>
 
@@ -183,9 +185,9 @@
                 $("#id_table_refresh").html(result);
             },
             error: function (errorMsg) {
-            //请求失败时执行该函数
-            alert("请求失败!");
-        }
+                //请求失败时执行该函数
+                alert("请求失败!");
+            }
         })
     }
 
@@ -194,11 +196,10 @@
             url: "/admin/delBlog",
             data: {
                 "id": $(button).attr("data-id"),
-                "pageNum": pageNum, title: $("[name='title']").val(), columnId: $("[name='columnId']").val(),
             },
             type: "delete",
             success: function (result) {
-                $("#id_table_refresh").html(result);
+                $("#table-container").html(result);
             }
         })
     }
