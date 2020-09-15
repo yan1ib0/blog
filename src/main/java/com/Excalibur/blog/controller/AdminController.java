@@ -89,7 +89,7 @@ public class AdminController {
         PageInfo<Blog> pageInfo = blogService.getBlogPaging(1);
         model.addAttribute("columns", columnService.getAll());
         model.addAttribute("pageInfo", pageInfo);
-        return "admin/manage::table_refresh";
+        return "admin/manage";
     }
     //查 <按条件>
     @PostMapping("/findCondition")
