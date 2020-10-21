@@ -3,6 +3,7 @@ package test;
 import com.Excalibur.blog.App;
 import com.Excalibur.blog.dao.*;
 import com.Excalibur.blog.entity.*;
+import com.Excalibur.blog.service.ColumnService;
 import org.junit.Test;
 import org.junit.platform.commons.util.StringUtils;
 import org.junit.runner.RunWith;
@@ -11,6 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
+import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
 
@@ -28,6 +30,18 @@ public class DaoTest {
     ColumnMapper columnMapper;
     @Autowired
     BlogMapper blogMapper;
+    @Autowired
+    ColumnService columnService;
+    @Test
+    public void updatecount(){
+        Column column=new Column();
+        column.setId(1);
+        column.setName("java");
+        column.setIntro("java是/....");
+        column.setCreateTime(new Date());
+        column.setBlogCount(0);
+        columnService.updateBlogCount(column);
+    }
 
     @Test
     public void userSelect(){

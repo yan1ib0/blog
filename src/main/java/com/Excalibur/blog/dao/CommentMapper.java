@@ -90,6 +90,7 @@ public interface CommentMapper {
     int updateByPrimaryKeySelective(Comment record);
 
     @Update({
+
         "update comment",
         "set reply_name = #{replyName,jdbcType=VARCHAR},",
           "reply_email = #{replyEmail,jdbcType=VARCHAR},",

@@ -2,7 +2,9 @@ package com.Excalibur.blog.dao;
 
 import com.Excalibur.blog.entity.Column;
 import com.Excalibur.blog.entity.ColumnExample;
+
 import java.util.List;
+
 import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.InsertProvider;
@@ -18,69 +20,75 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface ColumnMapper {
-    @SelectProvider(type=ColumnSqlProvider.class, method="countByExample")
+    @SelectProvider(type = ColumnSqlProvider.class, method = "countByExample")
     long countByExample(ColumnExample example);
 
     @Delete({
-        "delete from columnis",
-        "where id = #{id,jdbcType=INTEGER}"
+            "delete from columnis",
+            "where id = #{id,jdbcType=INTEGER}"
     })
     int deleteByPrimaryKey(Integer id);
 
     @Insert({
-        "insert into columnis (id, name, ",
-        "intro, blog_count, ",
-        "create_time)",
-        "values (#{id,jdbcType=INTEGER}, #{name,jdbcType=VARCHAR}, ",
-        "#{intro,jdbcType=VARCHAR}, #{blogCount,jdbcType=INTEGER}, ",
-        "#{createTime,jdbcType=TIMESTAMP})"
+            "insert into columnis (id, name, ",
+            "intro, blog_count, ",
+            "create_time)",
+            "values (#{id,jdbcType=INTEGER}, #{name,jdbcType=VARCHAR}, ",
+            "#{intro,jdbcType=VARCHAR}, #{blogCount,jdbcType=INTEGER}, ",
+            "#{createTime,jdbcType=TIMESTAMP})"
     })
     int insert(Column record);
 
-    @InsertProvider(type=ColumnSqlProvider.class, method="insertSelective")
+    @InsertProvider(type = ColumnSqlProvider.class, method = "insertSelective")
     int insertSelective(Column record);
 
-    @SelectProvider(type=ColumnSqlProvider.class, method="selectByExample")
+    @SelectProvider(type = ColumnSqlProvider.class, method = "selectByExample")
     @Results({
-        @Result(column="id", property="id", jdbcType=JdbcType.INTEGER, id=true),
-        @Result(column="name", property="name", jdbcType=JdbcType.VARCHAR),
-        @Result(column="intro", property="intro", jdbcType=JdbcType.VARCHAR),
-        @Result(column="blog_count", property="blogCount", jdbcType=JdbcType.INTEGER),
-        @Result(column="create_time", property="createTime", jdbcType=JdbcType.TIMESTAMP)
+            @Result(column = "id", property = "id", jdbcType = JdbcType.INTEGER, id = true),
+            @Result(column = "name", property = "name", jdbcType = JdbcType.VARCHAR),
+            @Result(column = "intro", property = "intro", jdbcType = JdbcType.VARCHAR),
+            @Result(column = "blog_count", property = "blogCount", jdbcType = JdbcType.INTEGER),
+            @Result(column = "create_time", property = "createTime", jdbcType = JdbcType.TIMESTAMP)
     })
     List<Column> selectByExample(ColumnExample example);
 
     @Select({
-        "select",
-        "id, name, intro, blog_count, create_time",
-        "from columnis",
-        "where id = #{id,jdbcType=INTEGER}"
+            "select",
+            "id, name, intro, blog_count, create_time",
+            "from columnis",
+            "where id = #{id,jdbcType=INTEGER}"
     })
     @Results({
-        @Result(column="id", property="id", jdbcType=JdbcType.INTEGER, id=true),
-        @Result(column="name", property="name", jdbcType=JdbcType.VARCHAR),
-        @Result(column="intro", property="intro", jdbcType=JdbcType.VARCHAR),
-        @Result(column="blog_count", property="blogCount", jdbcType=JdbcType.INTEGER),
-        @Result(column="create_time", property="createTime", jdbcType=JdbcType.TIMESTAMP)
+            @Result(column = "id", property = "id", jdbcType = JdbcType.INTEGER, id = true),
+            @Result(column = "name", property = "name", jdbcType = JdbcType.VARCHAR),
+            @Result(column = "intro", property = "intro", jdbcType = JdbcType.VARCHAR),
+            @Result(column = "blog_count", property = "blogCount", jdbcType = JdbcType.INTEGER),
+            @Result(column = "create_time", property = "createTime", jdbcType = JdbcType.TIMESTAMP)
     })
     Column selectByPrimaryKey(Integer id);
 
-    @UpdateProvider(type=ColumnSqlProvider.class, method="updateByExampleSelective")
+    @UpdateProvider(type = ColumnSqlProvider.class, method = "updateByExampleSelective")
     int updateByExampleSelective(@Param("record") Column record, @Param("example") ColumnExample example);
 
-    @UpdateProvider(type=ColumnSqlProvider.class, method="updateByExample")
+    @UpdateProvider(type = ColumnSqlProvider.class, method = "updateByExample")
     int updateByExample(@Param("record") Column record, @Param("example") ColumnExample example);
 
-    @UpdateProvider(type=ColumnSqlProvider.class, method="updateByPrimaryKeySelective")
+    @UpdateProvider(type = ColumnSqlProvider.class, method = "updateByPrimaryKeySelective")
     int updateByPrimaryKeySelective(Column record);
 
-    @Update({
-        "update columnis",
-        "set name = #{name,jdbcType=VARCHAR},",
-          "intro = #{intro,jdbcType=VARCHAR},",
-          "blog_count = #{blogCount,jdbcType=INTEGER},",
-          "create_time = #{createTime,jdbcType=TIMESTAMP}",
-        "where id = #{id,jdbcType=INTEGER}"
+    @Update({"<script>",
+            "update columnis",
+            "set ",
+            "<if test='name != null'>",
+            "name = #{name,jdbcType=VARCHAR}</if>",
+            "<if test='intro != null'>",
+            ",intro = #{intro,jdbcType=VARCHAR}</if>",
+            "<if test='blogCount != null'>",
+            ",blog_count = #{blogCount,jdbcType=INTEGER}</if>",
+            "<if test='createTime != null'>",
+            ",create_time = #{createTime,jdbcType=TIMESTAMP}</if>",
+            "where id = #{id,jdbcType=INTEGER}",
+            "</script>"
     })
     int updateByPrimaryKey(Column record);
 }

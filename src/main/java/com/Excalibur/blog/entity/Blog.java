@@ -1,7 +1,5 @@
 package com.Excalibur.blog.entity;
 
-import com.Excalibur.blog.Util.BlobUtil;
-
 import java.util.Date;
 
 public class Blog {

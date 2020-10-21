@@ -2,9 +2,12 @@ package com.Excalibur.blog.service;
 
 import com.Excalibur.blog.entity.Blog;
 import com.github.pagehelper.PageInfo;
-import org.omg.PortableInterceptor.INACTIVE;
 
 import java.util.List;
+/*
+ *  博客 Service
+ *
+ */
 
 public interface BlogService {
     Integer addBlog(Blog blog);
@@ -14,4 +17,6 @@ public interface BlogService {
     Integer delBlog(Integer id);
     Blog getOneById(Integer id);
     Integer updateBlog(Blog blog);
+    List<Blog> getBlogByColumnist(Integer columnId);
+    List<Blog> getListByName(String name);
 }

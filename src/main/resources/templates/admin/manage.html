@@ -16,10 +16,11 @@
     <div class="ui container">
         <div class="ui inverted secondary menu stackable">
             <h2 class="ui teal header item">管理后台</h2>
-            <a th:href="@{/index}" class="m-item  item m-mobile-hide"><i class="home icon"></i>博客</a>
+            <a th:href="@{/index}" class="m-item  item m-mobile-hide"><i class="home icon"></i>主页</a>
+            <a th:href="@{/admin/index}" class="m-item  item m-mobile-hide"><i class="home icon"></i>博客</a>
             <a th:href="@{/admin/columnistPage}" class="m-item item m-mobile-hide"><i class="idea icon"></i>分类</a>
-            <a href="/admin/tags" class="m-item item m-mobile-hide"><i class="tags icon"></i>标签</a>
-            <a href="/admin/comments" class="m-item item m-mobile-hide"><i class="comment icon"></i>评论管理</a>
+            <a th:href="@{/tag/tagPage}" class="m-item item m-mobile-hide"><i class="tags icon"></i>标签</a>
+            <a th:href="@{/comment/commentPage}" class="m-item item m-mobile-hide"><i class="comment icon"></i>评论管理</a>
             <div class="right menu">
                 <div class="ui dropdown item m-item m-mobile-hide">
                     <img th:src="@{/images/icon.jpg}" class="ui avatar image">
@@ -40,7 +41,7 @@
 <!--二级导航-->
 <div class="ui menu attached inverted ">
     <div class="ui container">
-        <a href="/admin/blog-input" class="item">发布</a>
+        <a href="/admin/blogAddPage" class="item">发布</a>
         <a href="/admin/blogs" class="active item">列表</a>
     </div>
 </div>
@@ -99,8 +100,7 @@
 
 
                     <td>
-                        <a class="ui button  teal basic mini " th:href="@{'/admin/editBlogPage/'+${blog.getId()}}">编辑</a>
-                        <button class="ui button  red basic mini " th:attr="data-id=${blog.getId()}"
+                         <button class="ui button  red basic mini " th:attr="data-id=${blog.getId()}"
                                 onclick="deleteBlog(this)">删除
                         </button>
 
@@ -117,7 +117,7 @@
                             <a onclick="pre()" class="ui item ">上一页</a>
                             <a onclick="next()" class="ui item ">下一页</a>
                         </div>
-                        <a th:href="@{/admin/blogAddPage}" class="ui mini right floated teal basic button">新增</a>
+                        <a th:href="@{/admin/blogAddPage}"  class="ui mini right floated teal basic button">新增</a>
                     </th>
                 </tr>
                 </tfoot>

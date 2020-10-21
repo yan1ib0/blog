@@ -8,6 +8,7 @@ import com.github.pagehelper.PageInfo;
 import org.junit.platform.commons.util.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Date;
 import java.util.List;
@@ -17,6 +18,7 @@ public class BlogServiceImpl implements BlogService {
     @Autowired
     BlogMapper blogMapper;
 
+    @Transactional
     public Integer addBlog(Blog blog) {
         if (blog.getBlogState() == 1) {
             //直接保存+发布
@@ -28,24 +30,31 @@ public class BlogServiceImpl implements BlogService {
         return blogMapper.insert(blog);
     }
 
-    public List<Blog> getAll() {
-        Blog blog = new Blog();
+    public List<Blog> getAll(){
+
         BlogExample blogExample = new BlogExample();
+        BlogExample.Criteria criteria=blogExample.createCriteria();
+        criteria.andBlogStateEqualTo((byte)1);
         List<Blog> blogs = blogMapper.selectByExample(blogExample);
         return blogs;
     }
 
     public PageInfo<Blog> findCondition(Integer pageNum, Blog blog) {
+        PageHelper.clearPage();
         PageHelper.startPage(pageNum, 5);
         System.out.println("第" + pageNum + "页");
         BlogExample blogExample = new BlogExample();
         BlogExample.Criteria criteria = blogExample.createCriteria();
-        if (StringUtils.isNotBlank(blog.getTitle())) {
-            criteria.andTitleLike("%" + blog.getTitle() + "%");
-        }
-        if (StringUtils.isNotBlank(blog.getColumnId() == null ? "" : blog.getColumnId().toString())) {
-            criteria.andColumnIdEqualTo(blog.getColumnId());
-        }
+
+            if (StringUtils.isNotBlank(blog.getTitle())) {
+                criteria.andTitleLike("%" + blog.getTitle() + "%");
+            }
+            if (StringUtils.isNotBlank(blog.getColumnId() == null ? "" : blog.getColumnId().toString())) {
+                criteria.andColumnIdEqualTo(blog.getColumnId());
+            }
+            if (StringUtils.isNotBlank(blog.getBlogState().toString()))
+                criteria.andBlogStateEqualTo((byte)1);
+
         List<Blog> blogs = blogMapper.selectByExample(blogExample);
         PageInfo<Blog> pageInfo = new PageInfo<Blog>(blogs);
         return pageInfo;
@@ -53,7 +62,7 @@ public class BlogServiceImpl implements BlogService {
 
 
     public PageInfo<Blog> getBlogPaging(Integer pageNum) {
-        System.out.println("获取blog服务");
+        PageHelper.clearPage();
         PageHelper.startPage(pageNum, 5);
         Blog blog = new Blog();
         BlogExample blogExample = new BlogExample();
@@ -80,8 +89,28 @@ public class BlogServiceImpl implements BlogService {
     }
 
     public Integer updateBlog(Blog blog) {
-
         return blogMapper.updateByPrimaryKey(blog);
+    }
+
+    public List<Blog> getBlogByColumnist(Integer columnId) {
+        BlogExample blogExample = new BlogExample();
+        BlogExample.Criteria criteria = blogExample.createCriteria();
+        if (StringUtils.isNotBlank(columnId.toString())) {
+            criteria.andColumnIdEqualTo(columnId);
+            criteria.andBlogStateEqualTo((byte)1);
+        }
+        List<Blog> blogs = blogMapper.selectByExampleWithBLOBs(blogExample);
+        return blogs;
+    }
+
+    public List<Blog> getListByName(String name) {
+        BlogExample blogExample = new BlogExample();
+        BlogExample.Criteria criteria = blogExample.createCriteria();
+        if (StringUtils.isNotBlank(name)) {
+            criteria.andTitleEqualTo(name);
+        }
+        List<Blog> blogs = blogMapper.selectByExampleWithBLOBs(blogExample);
+        return blogs;
     }
 
 

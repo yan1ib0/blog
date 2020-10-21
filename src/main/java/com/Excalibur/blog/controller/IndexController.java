@@ -19,9 +19,9 @@ import java.util.List;
 
 
 @Controller
-public class TestController {
+public class IndexController {
     @Autowired      //分类
-            ColumnService columnService;
+    ColumnService columnService;
 
     @Autowired
     TagService tagService;
@@ -40,29 +40,36 @@ public class TestController {
         return "admin/login";
     }
 
-    @GetMapping("/")
+    @GetMapping("/index")
     public String Index(Model model) {
-        List<Blog> blogs=blogService.getAll();
-        PageInfo<Blog> blogPageInfo=blogService.getBlogPaging(1);
+        Blog blog=new Blog();
+        blog.setBlogState((byte)1);
+        PageInfo<Blog> blogPageInfo=blogService.findCondition(1,blog);
         model.addAttribute("columns",columnService.getAll());
-        model.addAttribute("blogs",blogs);
         model.addAttribute("pageInfo",blogPageInfo);
         return "index";
     }
-    @ResponseBody
-    @PostMapping("/ad")
-    public String getColumn(Integer id){
-        Column column=columnService.getColumnById(id);
-        System.out.println(column.getName());
-        return column.getName();
+    @GetMapping("/")
+    public String index(Model model) {
+        Blog blog=new Blog();
+        blog.setBlogState((byte)1);
+        PageInfo<Blog> blogPageInfo=blogService.findCondition(1,blog);
+        model.addAttribute("columns",columnService.getAll());
+        model.addAttribute("pageInfo",blogPageInfo);
+        return "index";
     }
+    @GetMapping("/About")
+    public String About(){
+        return "about";
+    }
+
     @PostMapping("/findAll")
     public String show(Integer pageNum, Model model) {
-        System.out.println("控制层");
-        Blog blog = new Blog();
-        PageInfo<Blog> pageInfo = blogService.getBlogPaging(pageNum);
-        model.addAttribute("columns", columnService.getAll());
-        model.addAttribute("pageInfo", pageInfo);
+        Blog blog=new Blog();
+        blog.setBlogState((byte)1);
+        PageInfo<Blog> blogPageInfo=blogService.findCondition(1,blog);
+        model.addAttribute("columns",columnService.getAll());
+        model.addAttribute("pageInfo",blogPageInfo);
         return "index::table_refresh";
     }
 }
