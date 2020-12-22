@@ -52,7 +52,7 @@ public class BlogServiceImpl implements BlogService {
             if (StringUtils.isNotBlank(blog.getColumnId() == null ? "" : blog.getColumnId().toString())) {
                 criteria.andColumnIdEqualTo(blog.getColumnId());
             }
-            if (StringUtils.isNotBlank(blog.getBlogState().toString()))
+            if (StringUtils.isNotBlank(blog.getBlogState() == null ? "" : blog.getBlogState().toString()))
                 criteria.andBlogStateEqualTo((byte)1);
 
         List<Blog> blogs = blogMapper.selectByExample(blogExample);
@@ -64,7 +64,6 @@ public class BlogServiceImpl implements BlogService {
     public PageInfo<Blog> getBlogPaging(Integer pageNum) {
         PageHelper.clearPage();
         PageHelper.startPage(pageNum, 5);
-        Blog blog = new Blog();
         BlogExample blogExample = new BlogExample();
         List<Blog> blogs = blogMapper.selectByExample(blogExample);
         PageInfo<Blog> pageInfo = new PageInfo<Blog>(blogs);
@@ -74,12 +73,11 @@ public class BlogServiceImpl implements BlogService {
     public Integer delBlog(Integer id) {
 
         Blog blog = blogMapper.selectByPrimaryKey(id);
-        blog.setBlogState((byte) -1);
+        blog.setBlogState((byte)-1);
         return blogMapper.updateByPrimaryKey(blog);
     }
 
     public Blog getOneById(Integer id) {
-        Blog blog = new Blog();
         BlogExample blogExample = new BlogExample();
         BlogExample.Criteria criteria = blogExample.createCriteria();
         if (StringUtils.isNotBlank(id.toString()))

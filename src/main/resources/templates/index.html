@@ -5,6 +5,7 @@
     <!--移动端的预览设置，用于适配移动端-->
     <meta name="viewport" content="width=device-width,initial-scale=1.0">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.2.13/semantic.css">
+
     <link rel="stylesheet" href="/css/myblog.css">
     <title>首页</title>
 </head>
@@ -17,19 +18,19 @@
             <h2 class="ui teal header item">Blog</h2>
             <!--          导航第一个位置是1，以此类推，1,2,3,4  -->
             <a href="/index" class="m-item item m-mobile-hide "><i class="home icon"></i>首页</a>
-            <a th:href="@{/admin/columnistPage}" class="m-item item m-mobile-hide"><i class="idea icon"></i>分类</a>
-            <a th:href="@{/tag/tagPage}" class="m-item item m-mobile-hide"><i class="tags icon"></i>标签</a>
+            <a th:href="@{/columnistPage}" class="m-item item m-mobile-hide"><i class="idea icon"></i>分类</a>
+            <a th:href="@{/tagPage}" class="m-item item m-mobile-hide"><i class="tags icon"></i>标签</a>
             <a href="/archives" class="m-item item m-mobile-hide"><i class="clone icon"></i>归档</a>
             <a href="/About" class="m-item item m-mobile-hide"><i class="info icon"></i>关于我</a>
             <div class="m-item right item  m-mobile-hide">
-                <form action="/search" method="get">
-                    <div class="ui action input inverted transparent ">
-                        <input type="text" name="title" placeholder="search...">
-                        <button class="ui icon button" type="submit">
-                            <i class="search icon"></i>
-                        </button>
-                    </div>
-                </form>
+<!--                <form action="/search" method="get">-->
+<!--                    <div class="ui action input inverted transparent ">-->
+<!--                        <input type="text" name="title" placeholder="search...">-->
+<!--                        <button class="ui icon button" type="submit">-->
+<!--                            <i class="search icon"></i>-->
+<!--                        </button>-->
+<!--                    </div>-->
+<!--                </form>-->
             </div>
         </div>
     </div>
@@ -183,7 +184,7 @@
                 <!--二维码-->
                 <div class="ui horizontal divider header">扫码关注我</div>
                 <div class="ui card centered" style="width: 11em">
-                    <img src="/images/csdn.png" alt="" class="ui rounded image">
+                    <img src="/images/qr.png" alt="" class="ui rounded image">
                 </div>
 
             </div>

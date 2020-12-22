@@ -56,7 +56,7 @@
                 <tr th:each="type,iter:${pageInfo.getList()}">
                     <td th:text="${iter.index+1}">1</td>
                     <td th:text="${type.getName()}">一年总结</td>
-                    <td th:text="${type.getBlogCount()}">3</td>
+                    <td id="count" th:text="${type.getBlogCount()}">3</td>
                     <td >使用中</td>
 <!--                    <td th:if="${type.getColumnistState()==-1}">已删除</td>-->
                     <td th:text="${#dates.format(type.getCreateTime(),'yyyy-MM-dd')}">2020-7-04 15:12</td>
@@ -148,6 +148,8 @@
     }
 
     function deleteColumnist(button) {
+        if($("count").val()>0)
+            return
         $.ajax({
             url: "/admin/delColumnist",
             data: {

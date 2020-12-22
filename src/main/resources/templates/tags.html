@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <!--移动端的预览设置，用于适配移动端-->
     <meta name="viewport" content="width=device-width,initial-scale=1.0">
-    <link rel="stylesheet" href="/Semantic-UI-CSS-master/semantic.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.2.13/semantic.css">
     <link rel="stylesheet" href="/css/myblog.css">
     <title>标签</title>
 
@@ -24,13 +24,13 @@
                     <h3 class="ui header teal">标签</h3>
                 </div>
                 <div class="column right aligned">
-                    共<h2 class="ui orange header m-inline-block mth" th:text="${pageInfo.getTotal()}">
+                    共<h2 class="ui orange header m-inline-block mth" th:text="${tags.getTotal()}">
                     &nbsp;14&nbsp; </h2>个
                 </div>
             </div>
         </div>
         <div class="ui bottom attached segment">
-            <a th:each="tag,iter:${pageInfo.getList()}" th:href="@{'/tagIdPage?tagId='+${tag.getId()}}">
+            <a th:each="tag,iter:${tags.getList()}" th:href="@{'/tagIdPage?tagId='+${tag.getId()}}">
                 <div class="ui labeled button m-margin-tb-tiny" >
                     <div class="ui basic  button" th:text="${tag.getName()}"
                          th:classappend="${tag.getId() == tagId}? 'teal':''">一年总结
@@ -113,7 +113,7 @@
 
 
 <script src="/js/jquery-3.5.1.min.js"/>
-<script src="/Semantic-UI-CSS-master/semantic.min.js"/>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.2.13/semantic.js"/>
 <script type="text/javascript">
     // $('.menu.toggle').click(function (){
     //     $('.m-item').toggleClass('m-mobile-hide');

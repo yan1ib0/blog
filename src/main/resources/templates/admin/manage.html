@@ -20,7 +20,7 @@
             <a th:href="@{/admin/index}" class="m-item  item m-mobile-hide"><i class="home icon"></i>博客</a>
             <a th:href="@{/admin/columnistPage}" class="m-item item m-mobile-hide"><i class="idea icon"></i>分类</a>
             <a th:href="@{/tag/tagPage}" class="m-item item m-mobile-hide"><i class="tags icon"></i>标签</a>
-            <a th:href="@{/comment/commentPage}" class="m-item item m-mobile-hide"><i class="comment icon"></i>评论管理</a>
+<!--            <a th:href="@{/comment/commentPage}" class="m-item item m-mobile-hide"><i class="comment icon"></i>评论管理</a>-->
             <div class="right menu">
                 <div class="ui dropdown item m-item m-mobile-hide">
                     <img th:src="@{/images/icon.jpg}" class="ui avatar image">
@@ -98,8 +98,8 @@
                                         <td th:if="${blog.getBlogState()==-1}">已删除</td>
                     <input type="hidden" name="Blogid" th:value="${blog.getId()}"/>
 
-
                     <td>
+                        <a class="ui button  teal basic mini " th:href="@{'/admin/editBlogPage/'+${blog.getId()}}">编辑</a>
                          <button class="ui button  red basic mini " th:attr="data-id=${blog.getId()}"
                                 onclick="deleteBlog(this)">删除
                         </button>

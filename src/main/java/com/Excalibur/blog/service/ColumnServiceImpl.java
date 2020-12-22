@@ -59,12 +59,18 @@ public class ColumnServiceImpl implements ColumnService {
     }
 
     public int addBlog(Column column) {
+
         column.setBlogCount(0);
         column.setCreateTime(new Date());
+
+
+
         return columnMapper.insert(column);
     }
 
     public int deleteColumn(Integer id) {
+        if(columnMapper.selectByPrimaryKey(id).getBlogCount()>0)
+            return 0;
         return columnMapper.deleteByPrimaryKey(id);
     }
 }

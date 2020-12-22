@@ -25,8 +25,6 @@ public class DaoTest {
     @Autowired
     TagMapper tagMapper;
     @Autowired
-    CommentMapper commentMapper;
-    @Autowired
     ColumnMapper columnMapper;
     @Autowired
     BlogMapper blogMapper;
@@ -74,17 +72,7 @@ public class DaoTest {
             System.out.println(it.next());
         }
     }
-    @Test   //测评论
-    public void CommentSelect(){
-        Comment comment=new Comment();
-        CommentExample commentExample=new CommentExample();
-        CommentExample.Criteria criteria=commentExample.createCriteria();
-        List<Comment> comments=commentMapper.selectByExample(commentExample);
-        Iterator<Comment> it=comments.iterator();
-        while(it.hasNext()){
-            System.out.println(it.next());
-        }
-    }
+
 
     @Test
     public void columnSelect(){

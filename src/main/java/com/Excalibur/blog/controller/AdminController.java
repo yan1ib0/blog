@@ -56,6 +56,8 @@ public class AdminController {
         return "admin/columnist_add";
     }
 
+
+    //跳转        <修改 分类(专栏)  页面>
     @GetMapping("/editColumnist/{id}")
     public String editColumnPage(@PathVariable Integer id, Model model) {
         Column column = columnService.getColumnById(id);
@@ -73,7 +75,7 @@ public class AdminController {
             System.err.println("<<<< :: 添加专栏失败 :: >>>>");
         }
         System.out.println("<<<< :: 插入专栏成功 :: >>>>  " + code);
-
+        columnService.updateBlogCount(column);
         return "redirect:/admin/columnistPage";
     }
 
@@ -94,7 +96,7 @@ public class AdminController {
         columnService.update(column);
         PageInfo<Column> pageInfo = columnService.getColumnPaging(1);
         model.addAttribute("pageInfo",pageInfo);
-
+        columnService.updateBlogCount(column);
         return "admin/columnist";
 
     }
@@ -132,7 +134,7 @@ public class AdminController {
         model.addAttribute("columns", columnService.getAll());
         model.addAttribute("tags", tagService.getAll());
         model.addAttribute("pageInfo", pageInfo);
-        model.addAttribute("content", new String(blog.getContent()));
+        model.addAttribute("content",new String(blog.getContent()));
         return "/admin/blog_edit";
     }
 
@@ -159,16 +161,18 @@ public class AdminController {
     //删除           博客
     @DeleteMapping("/delBlog")
     public String DeleteBlog(@RequestParam Integer id, Model model) {
-        int code = blogService.delBlog(id);
-        PageInfo<Blog> pageInfo = blogService.getBlogPaging(1);
-        model.addAttribute("columns", columnService.getAll());
-        model.addAttribute("pageInfo", pageInfo);
-
         //更新博客数
         int count = blogService.getBlogByColumnist(blogService.getOneById(id).getColumnId()).size();
         Column column = columnService.getColumnById(blogService.getOneById(id).getColumnId());
         column.setBlogCount(count);
         columnService.updateBlogCount(column);
+
+        blogService.delBlog(id);
+        PageInfo<Blog> pageInfo = blogService.getBlogPaging(1);
+        model.addAttribute("columns", columnService.getAll());
+        model.addAttribute("pageInfo", pageInfo);
+
+
 
         return "admin/manage::table_refresh";
     }
